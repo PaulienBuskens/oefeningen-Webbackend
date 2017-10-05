@@ -1,2 +1,0 @@
-RewriteEngine On
-RewriteRule ^warp-zone.php$ level-1.php

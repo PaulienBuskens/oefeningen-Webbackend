@@ -32,8 +32,6 @@
             echo "De eerste plaats waarop 0 staat is: ";
             echo (strpos($fruit,"o"))+1;
             
-                    
-            
             ?></p>
       
             <h1>Opdracht string extra functions: deel 2</h1>
@@ -44,6 +42,13 @@
                 <li>Druk deze waarde af.</li>
                 <li>Zet het de value van de <code>$fruit</code> variable in hoofdletters enkel door gebruik te maken van een PHP-functie.</li>
             </ul>
+
+            <?php 
+                $fruit = 'ananas';
+
+                echo "De laatste plaats waar 'a' staat is: ";
+                echo (strripos($fruit,"a"))+1;
+            ?>
       
     		<h1>Opdracht string extra functions: deel 3</h1>
 

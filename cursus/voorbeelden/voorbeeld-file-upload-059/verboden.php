@@ -1,5 +1,0 @@
-<?php
-
-	echo 'verboden terrein!';
-
-?>
