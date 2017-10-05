@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Opdracht MVC Tutorial</title>
+        <link rel="stylesheet" href="http://web-backend.local/css/global.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/facade.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/directory.css">
+    </head>
+    <body class="web-backend-opdracht">
+        
+        <section class="body">  
+
+    		<h1>Opdracht MVC Tutorial: deel 1</h1>
+
+    		<ul>
+    			<li><a href="http://anantgarg.com/2009/03/13/write-your-own-php-mvc-framework-part-1/"> In deze tutorial van Anant Garg</a> wordt beschreven hoe je een eigen MVC-framework kan bouwen. De bedoeling is om deze tutorial te doornemen en alle stappen te volgen die er beschreven staan.</li>
+
+                <li>Maak stap per stap elk beschreven bestand aan.</li>
+
+                <li>Lees wat er over elk bestand wordt gezegd en probeer te begrijpen wat de functie is van de bestanden die je net hebt aangemaakt.</li>
+
+                <li>Lees ook de code van het bestand. Hier komen functies en methodes in voor die in je verdere PHP-carrière nog van pas kunnen komen.</li>
+
+                <li>
+                    Extra aandacht bij het aanmaken van de database en het config.php bestand
+                    <ul>
+                        <li>In de tutorial staat dat je een database moet aanmaken met de naam 'todo'. Verander de databasenaam in opdracht_MVC_tutorial</li>
+
+                        <li>Vergeet de nodige aanpassingen aan het config.php bestand niet (yourdatabasename, yourusername, yourpassword, ...)</li>
+
+                        <li>Voeg aan dit config.php bestand een nieuwe constante toe: <code>BASEPATH_HARDCODED</code></li>
+
+                        <li>Deze constante heeft als waarde de root url naar de folder waar jouw applicatie toegankelijk is (bv. http://www.app.local/opdracht_MVC_tutorial/ )</li>
+                    </ul>
+                </li>
+
+                <li>
+                   Extra aandacht bij het aanmaken van de views
+                        <ul>
+                            <li><code>&lt;a class="big" href="../../../items/delete/&lt;?php echo $todo['Item']['id']?&gt</code></li>
+
+                            <li>Maak gebruik van de <code>BASEPATH_HARDCODED</code> constante i.p.v. de backreference (../.../.../) om naar de action te linken.</li>
+
+                            <li>Doe dit voor alle links in alle views.</li>
+                        </ul>
+                    
+
+                </li>
+
+                <li>Als alles goed is verlopen, kan je surfen naar http://www.app.local/opdracht_MVC_tutorial/items/viewall/</li>
+
+                <li>Test alle functies (de toevoegfunctie, het bekijken van een individuele entry en het deleten van een entry)</li>
+
+    		</ul>
+
+            <h1>Opdracht MVC Anant Garg: deel 2 - breid het framework uit</h1>
+
+            <ul>
+                <li>Deze uitbreiding is een uitbreiding van de applicatie gebaseerd op de Items applicatie.</li>
+
+                <li>Wanneer je surft naar http://www.app.local/opdracht_MVC_tutorial/users/viewall/ krijg je een overzicht van alle users in de database opdracht_MVC_tutorial</li>
+
+                <li>Normaalgezien zou je na het doorlopen van de tutorial moeten weten dat je dus een tabel users zal moeten aanmaken.</li>
+
+                <li>In deze tabel zitten de volgende velden:
+                    <ul>
+                        <li>id: (primary key, unsigned, auto_increment)</li>
+                        <li>email (varchar 255 karakters)</li>
+                        <li>password (varchar 255 karakters)</li>
+                        <li>last_login (datetime)</li>
+                    </ul>
+                </li>
+
+                <li>Baseer je op de bestaande controller, model en views uit de application folder van het Items onderdeel uit de tutorial.</li>
+
+                <li>
+                    Voor de controller van de Users application zijn vier mogelijk actions:
+                    <ul>
+                        <li><code>viewall()</code>: Geeft een overzicht van alle gebruikers in de tabel users</li>
+                        <li><code>view()</code>: Toont alle data van een gebruiker (email, password en last_login) op basis van een ID</li>
+                        <li><code>add()</code>: Voegt een gebruiker toe aan de tabel users. Het paswoord moet MD5 hashed zijn</li>
+                        <li><code>delete()</code>: Verwijdert een gebruiker uit de tabel users op basis van het ID</li>
+                    </ul>
+                </li>
+
+                <li>Hoe deze actions worden uitgevoerd mag je zelf beslissen, maar uiteraard is het best om dezelfde analogie te volgen als de <code>Items</code></li>
+
+                <li>Het model heeft dezelfde functies als het model van het <code>Items</code> model</li>
+
+                <li>Volgende views zijn aanwezig (zet deze in de daarvoor bestemde map -> zie tutorial)
+                    <ul>
+                        <li><span class="directory-sa-file">header.php</span> (naar analogie met de header van de Items).
+                            <ul>
+                                <li>Dit echoot de titel die je in de users-controller hebt geset in het titel-attribuut en in <code>&lt;h1&gt;</code> waarin de titel nogmaals voorkomt</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="directory-sa-file">footer.php</span>
+
+                            <ul>
+                                <li>Dit echoot een paragraaf met je naam</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="directory-sa-file">viewall.php</span>
+
+                            <ul>
+                                <li>Dit echoot een formulier dat verwijst naar de add action</li>
+                                
+                                <li>Het gaat hier om een post, omdat er data in de database wordt ingevoerd</li>
+                                
+                                <li>Dit echoot eveneens een overzicht van alle e-mailadressen van de gebruikers in de tabel users. </li>
+                                
+                                <li>Elke e-mailadres is een link naar de detailpagina van de gebruiker, de view-action gevolgd door het ID van de gebruiker, bv: http://www.app.local/opdracht_MVC_tutorial/users/view/1/ )</li>
+
+                                <li>Elk e-mailadres wordt gevolgd door een 'Verwijder gebruiker' link. Deze link verwijst naar de delete action, bv. http://www.app.local/opdracht_MVC_tutorial/users/delete/1/</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="directory-sa-file">view.php</span>
+
+                            <ul>
+                                <li>Deze pagina geeft een overzicht van het e-mailadres, het paswoord en laatste login_time van de geselecteerde gebruiker</li>
+
+                                <li>Zorg ervoor dat wanneer je naar een pagina surft je dus een correcte HTML-pagina te zien krijgt met een html-tag, head-tag, body tag die correct worden afgesloten. </li>
+
+                                <li>Kijk je header en footer dus goed na.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </section>
+
+    </body>
+</html>

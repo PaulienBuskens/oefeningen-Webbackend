@@ -1,0 +1,30 @@
+<VirtualHost web-backend.local:* > 
+    DocumentRoot "C:\map-naar-web-backend-cursus" 
+    ServerName web-backend.local 
+    <Directory "C:\map-naar-web-backend-cursus">
+        AllowOverride All
+        Require all granted
+        Options +Indexes
+        IndexOptions NameWidth=*
+    </Directory> 
+</VirtualHost>
+
+* Voor mac gebruikers
+- http://jonathannicol.com/blog/2012/03/11/configuring-virtualhosts-in-xampp-on-mac/
+- httpd-vhost.conf bestand vind je vermoedelijk in /Applications/XAMPP/etc/extra/httpd-vhosts.conf
+- Pas de volgende dingen aan in het /Applications/XAMPP/etc/httpd.conf bestand
+    - zoek naar #Include /Applications/xampp/etc/extra/httpd-vhosts.conf
+    - Verwijder de # voor de Include
+    - Herstart XAMPP en probeer opnieuw
+    - Lukt dit nog niet (bv. toegang gewijderd) zoek dan naar deze regels in het httpd.conf bestand
+    
+        # User/Group: The name (or #number) of the user/group to run httpd as.
+        # It is usually good practice to create a dedicated user and group for
+        # running httpd, as with most system services.
+        #
+        User daemon
+        Group daemon
+    - Verander de User daemon in User gebruikersnaam
+    - De gebruikersnaam is je Mac-gebruikersnaam
+    - Verander de Group daemon in Group nogroup
+    - Sla het bestand op en herstart je Apache-module
