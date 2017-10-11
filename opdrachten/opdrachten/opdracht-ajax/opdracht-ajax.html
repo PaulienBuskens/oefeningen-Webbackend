@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Opdracht ajax</title>
+        <link rel="stylesheet" href="http://web-backend.local/css/global.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/facade.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/directory.css">
+    </head>
+    <body class="web-backend-opdracht">
+        
+        <section class="body">
+        
+            <h1>Opdracht ajax</h1>
+
+            <ul>
+
+                <li>Deze opdracht bouwt verder op de opdracht-mail en voegt bovenop de PHP-functionaliteiten, de AJAX-functionaliteiten toe.</li>
+
+                <li>Deze opdracht is een simpel contactformulier, waarbij een gebruiker zijn e-mailadres en boodschap invult en aanvinkt of hij een kopie van het bericht wenst.
+                </li>
+
+                <li>Dit formulier wordt afgehandeld door een php-script dat het bericht toevoegt zowel aan de database als naar de desbetreffende personen verstuurt (minstens de admin/bedrijf en mogelijk ook de afzender zelf).</li>
+
+                <li>Het formulier is zo opgesteld dat het met AJAX verwerkt kan worden, maar daarbij moet er non-obtrusive JavaScript geschreven worden. Dat wil zeggen dat de applicatie ook moet werken met JS uitgeschakeld. Daarom moet eerst de PHP-laag opgebouwd worden, waarna de API voor de AJAX-call kan aangemaakt worden.</li>
+
+                <li>Het resultaat ziet er ongeveer als volgt uit:
+
+                    <div class="facade-minimal" data-url="http://www.app.local/contact-form.php">
+                                
+                        <h1>Contacteer ons</h1>
+
+                        <form>
+                            <ul>
+                                <li>
+                                    <label for="email">E-mailadres</label>
+                                    <input type="text" id="email" name="email">
+                                </li>
+                                <li>
+                                    <label for="message">Boodschap</label>
+                                    <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="copy" id="copy">
+                                    <label for="copy">Stuur een kopie naar mezelf</label>
+                                </li>
+                            </ul>
+                            <input type="submit" name="submit">
+                        </form>
+                    </div>
+                </li>
+
+                <li>De structuur ziet er ongeveer als volgt uit:
+                    <ul class="directory">
+                        <li class="file">contact.php</li>
+                        <li class="file">contact-form.php</li>
+                        <li class="file">contact-API.php</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Maak een aparte database aan. Deze bevat een tabel contact_messages en heeft volgende kolommen:
+                    <ul>
+                        <li>id (PK)</li>
+                        <li>email (varchar)</li>
+                        <li>message (text)</li>
+                        <li>time_sent (datetime)</li>
+                    </ul>
+                </li>
+            </ul>
+ 
+        <h1>Opdracht ajax: deel 1 - contact-form.php</h1>
+
+        <ul>
+            <li>
+                Maak een html-document met formulier dat er als volgt uitziet:
+
+                <div class="facade-minimal" data-url="http://www.app.local/contact-form.php">
+                                
+                    <h1>Contacteer ons</h1>
+
+                    <form>
+                        <ul>
+                            <li>
+                                <label for="email">E-mailadres</label>
+                                <input type="text" id="email" name="email">
+                            </li>
+                            <li>
+                                <label for="message">Boodschap</label>
+                                <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="copy" id="copy">
+                                <label for="copy">Stuur een kopie naar mezelf</label>
+                            </li>
+                        </ul>
+                        <input type="submit" name="submit">
+                    </form>
+                </div>
+            </li>
+
+            <li>De action van het formulier verwijst naar <span class="directory-sa-file">contact.php</span></li>
+
+            <li>Zorg ervoor dat er foutboodschappen kunnen getoond worden door middel van een <code>$_SESSION</code> variabele</li>
+
+            <li>Zorg ervoor dat er wanneer er iets mis gaat bij het versturen van een email, de reeds ingevulde data bewaard blijft en ingevuld wordt in de nodige velden. Ook door middel van een <code>$_SESSION</code> variabele</li>
+        </ul>
+
+        <h1>Opdracht ajax: deel 2 - contact.php</h1>
+
+        <ul>
+            <li>
+                Deze pagina controleert of de nodige post-waarde geset zijn
+                <ul>
+                    <li>Zonee: foutbooschap instellen en redirecten</li>
+                </ul>
+            </li>
+
+            <li>Definieer een variabele <code>$admin</code>. Deze variabele zal het e-mailadres van de ontvanger bevatten <span class="tip">@hotmail.com-adressen worden standaard geblokkeerd</span></li>
+
+            <li>Prepareer de post-data zodat ze inserteerbaar is in de database</li>
+
+            <li>Maak een connectie met de database en voeg het bericht toe.</li>
+
+            <li>Als het invoegen gelukt is, controleer dan of de 'stuur een kopie naar mijzelf' aangevinkt is. Zoja, moet er een mail verstuurd worden naar de persoon die de mail heeft opgesteld.</li>
+
+            <li>Zorg ervoor dat er in de body van de mails HTML kan verwerkt worden om de mails een mooi uiterlijk te geven. <span>Je kan hiervoor <code>headers</code> gebruiken, of zelfs een externe mailer-class.</span></li>
+
+            <li>Stuur een mail met het bericht naar de admin.</li>
+
+            <li>
+                Als het versturen van de mails gelukt is: succesboodschap instellen, redirecten naar <span class="directory-sa-file">contact-form.php</span> en niet vergeten de <code>$_SESSION</code> variabele die instaat voor het onthouden van eventuele post-data te unsetten.
+                <ul>
+                    <li>Als het versturen niet gelukt is: foutbooschap instellen, redirecten naar <span class="directory-sa-file">contact-form.php</span> en de input-velden op basis van de <code>$_POST</code> array opnieuw invullen zodat de ingevulde waarden niet verloren gaan.</li>
+                </ul>
+            </li>
+
+        </ul>
+
+     
+        <h1>Opdracht ajax: deel 3 - contact-form.php (JavaScript instellen)</h1>
+
+        <ul>
+            
+            <li>Voeg onderaan de pagina de jQuery library toe (van de google api)</li>
+            
+            <li>Maak een scriptblock aan en test of jQuery correct wordt ingeladen.</li>
+            
+            <li>Maak de <code>ready()</code> method aan</li>
+            
+            <li>In deze ready method: selecteer het formulier en pas hier de <code>submit()</code> method op toe.</li>
+            
+            <li>Deze method heeft een callback als argument (=een anonieme functie) die automatisch wordt uitgevoerd wanneer iemand het formulier wil submitten.</li>
+
+            <li>Zet als laatste statement van deze callback-functie een return false omdat we op dit moment niet willen dat ons formulier gesubmit wordt -> we handelen dit af via AJAX.</li>
+
+            <li>Haal de data op van alle inputvelden in het formulier zodat deze in een POST-method kan doorgegeven worden. Dit kan makkelijk met de <code>serialize()</code> method.</li>
+
+            <li>Maak een simpele AJAX-call:
+                <ul>
+                    <li>type: post</li>
+                    <li>url: contact-api.php</li>
+                    <li>data: de data die je net hebt geserialized</li>
+                    <li>success: callback-functie (een anonieme functie die uitgevoerd wordt wanneer de post-data correct werd doorgestuurd)</li>
+                </ul>
+            </li>
+
+            <li>Je kan de data die werd gereturned bij een succesvolle AJAX-call weer opvangen door de callback een parameter te geven. Aan deze parameter wordt door jQuery automatisch de return-waarde van het PHP-script toegekend</li>
+
+            <li>Later komt hier de logica die een foutboodschap of succesboodschap moet tonen, nu volstaat het om de gereturnde data in de console te printen.</li>
+        </ul>
+
+        <h1>Opdracht ajax: deel 4 - contact-API.php (PHP instellen)</h1>
+
+        <ul>
+
+            <li>Deze pagina controleert of ze is opgeroepen door een AJAX-request. <span>Kijk naar de <code>$_SERVER</code>-variabele</span></li>
+
+            <li>Controleer daarna of de juite <code>$_POST</code> variabele geset zijn.</li>
+
+            <li>Als dit zo is, maak dan een variabele <code>$ajaxMessage</code> aan. Deze bevat een key <code>'type'</code> met als waarde <code>'success'</code>.</li>
+
+            <li>Deze variabele moet doorgegeven worden als antwoord op de AJAX-request
+
+                <ul>
+                    <li>Om deze waarde leesbaar te maken voor onze ajax-call, moeten we dit eerst naar JSON encoderen.</li>
+
+                    <li>Echo de geëncodeerde string.</li>
+                </ul>
+
+            </li>
+
+        </ul>
+
+        <h1>Opdracht ajax: deel 5 - contact-form.php (Antwoord van PHP opvangen met JS)</h1>
+
+        <ul>
+            
+            <li>Terug naar de success-callback van onze AJAX-call.</li>
+
+            <li>Deze callback kan de data opvangen die het php-formulier heeft doorgestuurd, als er een parameter aan de functie wordt gegeven. Deze parameter is de ruwe data die de php-pagina heeft gereturned.</li>
+
+            <li>Normaalgezien zou de value van deze data-parameter de string <code>{"type" = "success"}</code> moeten zijn. Controleer dit.</li>
+
+            <li>
+                Als dit klopt kan de data worden omgezet naar een leesbaar formaat voor JavaScript. Zoek op hoe je in JavaScript een JSON-string kan decoderen zodat het bruikbaar wordt in JavaScript
+
+                <ul>
+                    <li>kan via dataType in de ajax-call </li>
+                    <li>of manueel met JSON.parse</li>
+                </ul>
+            </li>
+
+            <li>Als het type success is, fade het formulier dan langzaam uit en laat de de boodschap "Bedankt! Uw bericht is goed verzonden!" langzaam infaden op dezelfde plek als het formulier. <span class="tip"><code>fadeout</code> in combinatie met een callback die een append en <code>fadein</code> bevat</span></li>
+
+            <li>Als het type error is (pas dit voorlopig even manueel aan in <span class="directory-sa-file">contact-API.php</span>), toon dan de boodschap "Oeps, er ging iets mis. Probeer opnieuw!" bovenaan het formulier. <span class="tip"><code>prepend</code> in combinatie met <code>hide</code> en <code>fadeIn</code></span></li>
+
+            <li>Test uitvoerig of naargelang de data die wordt doorgegeven door het php-bestand, de juiste handelingen worden uitgevoerd.</li>
+
+        </ul>
+
+        <h1>Opdracht ajax: deel 6 - contact-API.php (PHP-validatie instellen)</h1>
+
+        <ul>
+            
+            <li>De bedoeling is nu om de doorgestuurde waarden effectief te verwerken en verzenden. Maar, deze logica hebben we al eens uitgeschreven in <span class="directory-sa-file">contact.php</span>. Als je met classes hebt gewerkt, zal je weinig werk hebben. Zoniet, is het beter van de oefeningen eerst te herwerken naar classes.</li>
+
+            <li>Implementeer dezelfde logica in het contact-API.php zodat het bericht wordt toegevoegd aan de database en de mails verzonden worden wanneer de ajax-call wordt uitgevoerd.</li>
+
+            <li>Dus:
+
+                <ul>
+                    <li>Wanneer dit goed is verlopen, geef dan de succes-boodschap terug aan de AJAX-call (in het juiste formaat)</li>
+
+                    <li>Wanneer dit niet goed is verlopen, geef dan de error-boodschap terug aan de AJAX-call (in het juiste formaat)</li>
+                </ul>
+
+            </li>
+
+            <li>Als alles goed is verlopen, zou je nu een mail moeten kunnen versturen via de AJAX-call.</li>
+
+            <li>De ultieme test: schakel JavaScript uit en controleer of het nog steeds mogelijk is om een mail te versturen.</li>
+
+        </ul>
+
+        <h1>Opdracht ajax: uitbreidingen</h1>
+
+        <ul>
+            
+            <li>Toon een boodschap die toont dat de verzending in verwerking is. Deze moet weer verdwijnen wanneer de verzending effectief is uitgevoerd (moeilijkheid: -)</li>
+
+            <li>Zorg ervoor dat tijdens het verzenden de gebruiker niet nog eens op deverzendknop kan klikken: Schakel de 'verzenden' knop tijdelijk uit tot de verzending achter de rug is. (moeilijkheid: -)</li>
+
+            <li>Zorg voor verbeteringen op gebied van usability. Wat gebeurt er als we met de ajax-call eerst een error en dan een success boodschap terugkrijgen? Wat gebeurt er als we meerdere error-boodschappen na elkaar terugkrijgen? (moeilijkheid: -)</li>
+
+            <li>Zorg voor validatie zowel op PHP-niveau als op JavaScript-niveau (moeilijkheid: +/-)</li>
+
+            <li>Experimenteer met animaties (moeilijkheid: +/-)
+
+                <ul>
+                    <li>laat de elementen uit het formulier één voor één verdwijnen</li>
+
+                    <li>laat de success-boodschap tevoorschijn 'sliden'</li>
+
+                    <li>... suggesties?</li>
+                </ul>
+            </li>
+
+        </ul>
+
+        </section>
+
+    </body>
+</html>

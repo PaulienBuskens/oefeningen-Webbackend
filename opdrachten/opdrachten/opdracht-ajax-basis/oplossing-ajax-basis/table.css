@@ -1,0 +1,33 @@
+table
+{
+    font-size:12px;
+    overflow:auto;
+    border-collapse: collapse;
+}
+
+table th,
+table td
+{
+    padding:4px;
+}
+
+table th
+{
+    background: #DFDFDF;
+    text-align:center;
+}
+
+table tr
+{
+    transition: all 0.2s ease-out;
+}
+
+table tr:hover
+{
+    background-color:lightgreen;
+}
+
+.odd
+{
+    background: #F1F1F1;
+}
