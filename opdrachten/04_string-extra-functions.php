@@ -48,7 +48,14 @@
 
                 echo "De laatste plaats waar 'a' staat is: ";
                 echo (strripos($fruit,"a"))+1;
-            ?>
+
+                ?>
+                <p></p>
+
+                <?php
+                echo strtoupper ($fruit);
+                ?>
+            
       
     		<h1>Opdracht string extra functions: deel 3</h1>
 
@@ -61,6 +68,17 @@
                 </li>
     		</ul>
 
+            <?php
+
+            $lettertje = "e";
+            $cijfertje = 3;
+            $langsteWoord = "zandzeepsodemineralenwatersteenstralen";
+
+            echo str_replace($lettertje,$cijfertje,$langsteWoord);
+            
+
+
+            ?>
         </section>
 
     </body>
