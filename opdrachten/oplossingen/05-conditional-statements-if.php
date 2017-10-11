@@ -20,6 +20,17 @@
                 <li>Bijvoorbeeld, wanneer <code>$getal</code> gelijk is aan 1 dan wordt de string <code>'maandag'</code> op het scherm getoond</li>
             </ul>  
 
+            <?php
+                $getal = 1;
+                $dag = "";
+                if ($getal == 1){
+                    
+                   echo $dag = "maandag";
+
+                }
+
+            ?>
+
     		<h1 class="extra">Opdracht conditional statements: deel 2</h1>
 
     		<ul>
@@ -28,6 +39,57 @@
                 <li>Zet alle letters in hoofdletters, behalve de 'a'</li>
                 <li>Zet alle letters in hoofdletters, behalve de laatste 'a'</li>
     		</ul>
+
+
+            <?php
+                $getal = 1;
+                $dag = "";
+                if ($getal == 1){
+                    
+                   echo $dag = "maandag";
+                   
+                }
+                if ($getal == 2){
+
+                    echo $dag = "dinsdag";
+                }
+                if ($getal == 3){
+                    
+                   echo $dag = "woensdag";
+                   
+                }
+                if ($getal == 4){
+
+                    echo $dag = "donderdag";
+                }
+                if ($getal == 5){
+                    
+                   echo $dag = "vrijdag";
+                   
+                }
+                if ($getal == 6){
+
+                    echo $dag = "zaterdag";
+                }
+                if ($getal == 7){
+
+                    echo $dag = "zondag";
+                }
+                ?>
+
+                <p></p>
+                <?php
+
+                echo $dag =	strtoupper( $dag ); //Zet naar uppercase
+                //$dag 	=	str_replace( 'A', 'a' , $dag );
+                $laatsteAPos = strrpos( $dag, 'A' );   //Geef de positie van de laatste 'A';
+                ?>
+                <p></p>
+
+                <?php
+
+                echo $dag =	substr_replace( $dag, 'a', $laatsteAPos, 1 );   //Vervangt 'A' met 'a'
+            ?>
 
         </section>
 
