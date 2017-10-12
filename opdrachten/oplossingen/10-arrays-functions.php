@@ -21,6 +21,29 @@
 
                 <li>Maak het mogelijk om met een variabele <code>$teZoekenDier</code> een dier te zoeken in de array, druk tevens een gepaste boodschap af (gevonden/niet gevonden).</li>
 
+
+                <?php
+
+                 $dieren = array('koe','schaap', 'konijn', 'vis', 'paard');
+                 $tezoekendier = 'schaap';
+                 
+                 echo count($dieren);
+
+                
+                if (in_array($tezoekendier, $dieren))
+                {
+                echo "gevonden";
+                }
+                else
+                {
+                echo "niet gevonden";
+                }
+
+
+                
+                ?>
+
+
             </ul> 
 
             <h1 class="extra">Opdracht array functies: deel 2</h1>
