@@ -53,6 +53,8 @@
                 }
 
                 function functie2 ($karakter){
+                    
+                    //aanspreken van de globale variabele $md5HashKey
                     GLOBAL $md5HashKey;
                     
                     $count = strlen($md5HashKey);
@@ -66,7 +68,7 @@
                 }
 
                 function functie3 ($karakter){
-
+                                    //aanspreken van de globale variabele $md5HashKey
                         $string = $GLOBALS ['md5HashKey'];
 
                         $count = strlen($string);
@@ -90,17 +92,6 @@
                 <p>Het karakter "<?php echo "8"?>" komt <?php echo $tweedeFunctie ?>% voor in de hash key "<?php echo $md5HashKey ?>"</p>
                 <p>Het karakter "<?php echo "a"?>" komt <?php echo $derdeFunctie ?>% voor in de hash key "<?php echo $md5HashKey ?>"</p>
 
-                <li>
-                    Zorg ervoor dat het volgende wordt weergegeven: 
-
-                    <div class="facade-minimal" data-url="http://www.app.local/index.php">
-                        <p>Functie 2: De needle '8' komt 6.25% voor in de hash key 'd1fa402db91a7a93c4f414b8278ce073'</p>
-                        <p>Functie 3: De needle 'a' komt 9.375% keer voor in de hash key 'd1fa402db91a7a93c4f414b8278ce073'</p>
-                    </div>
-                </li>
-
-            </ul>
-
             <h1 class="extra">Opdracht functies gevorderd: deel 2 (Angry Birds)</h1>
 
             <ul>
@@ -108,6 +99,16 @@
                 <li>De bedoeling is om een versimpelde tekstversie van Angry Birds te maken (<a href="http://chrome.angrybirds.com/" target="_blank">http://chrome.angrybirds.com/</a>)</li>
 
                 <li>Maak een global variable <code>$pigHealth</code> met value <code>5</code> en een global variable <code>$maximumThrows</code> met value <code>8</code></li>
+
+
+                    <?php
+
+                    $pigHealth        = 5;
+                    $maximumThrows    = 8;
+
+                    $spelverloop      = array();
+
+                    ?>
 
                 <li>Maak een functie <code>calculateHit</code>. Deze functie staat in voor:
                     <ul>
@@ -118,6 +119,33 @@
                         <li>Het teruggeven van de string <code>'Raak! Er zijn nog maar xxx varkens over.'</code> of <code>'Mis! Nog xxx varkens in het team.'</code> naargelang het resultaat van het willekeurige getal. De xxx moet vervangen worden door het effectieve getal.
                     </li>
                 </li>
+
+                <?php
+
+                function calculateHit (){
+                    
+                    $dataArray  = array();
+                    $raakkans   = rand(0,9);
+                    $raak       = ($raakkans <= 3) ? true : false;
+                    GLOBAL $pigHealth;
+
+                    if ($raak){
+                        $pigHealth--;
+                        
+                        $dataArray['hit']       = true;
+                        $dataArray['string']    = "Raak! Er zijn nog maar ".  $pigHealth ." varkens over.";
+
+                    } else {
+                    
+                       $dataArray['hit']        = false;
+                       $dataArray['string']     = "Mis! Nog ". $pigHealth ." varkens in het team.";
+                    }
+
+                    return $dataArray;
+
+                }
+
+                ?>
 
                 <li>Maak een functie <code>launchAngryBird</code>. Deze functie staat in voor:
                     <ul>
@@ -130,39 +158,50 @@
                     </ul>
                 </li>
 
+                <?php
 
-                <li>Je mag de functie <code>launchAngryBird</code> maximum één keer aanroepen in het document.</li>
+                function launchAngryBird(){
 
-                <li>
-                    Het eindresultaat moet er ongeveer als volgt uitzien:
+                    GLOBAL $pigHealth;
+                    GLOBAL $maximumThrows;
+                    global  $spelverloop;
 
-                    <div class="facade-minimal" data-url="http://www.app.local/index.php">
+                    if($maximumThrows != 0 && $pigHealth > 0){
 
-                        <h1>Text-based Angry Birds</h1>
-                    
-                        <p>Raak! Er zijn nog maar 4 varkens over.</p>
-                       
-                        <p>Raak! Er zijn nog maar 3 varkens over.</p>
-                       
-                        <p>Mis! Er zijn nog 3 varkens over.</p>
-                       
-                        <p>Mis! Er zijn nog 3 varkens over.</p>
-                       
-                        <p>Mis! Er zijn nog 3 varkens over.</p>
+                        $hitResult = calculateHit ();
 
-                        <p>Raak! Er zijn nog maar 1 varkens over.</p>
+                        $maximumThrows--;
 
-                        <p>Raak! Er zijn nog maar 0 varkens over.</p>
+                        $spelverloop[] = $hitResult['string'];
 
-                        <p>Gewonnen!</p>
+                        launchAngryBird();
 
-                    </div>
-                </li>
+                    } else {
 
-                <li class="extension">Zorg ervoor dat de tekst grammatisch correct is wanneer <code>$pigHealth</code> gelijk is aan 1</li>
+                        if ($pigHealth >0){
 
-                <li class="extension">Zorg ervoor dat de functie automatisch stopt wanneer <code>$pigHealth</code> gelijk is aan 0</li>
+                            $spelverloop[] = 'Helaas, je hebt verloren,';
 
+                        } else {
+
+                            $spelverloop[] = 'Hoera! Je hebt gewonnen!';
+                        }
+
+                    }
+
+                }
+
+                launchAngryBird();
+
+                ?>
+
+            <h1>Angry Birds</h1>
+
+            <ul>
+                <?php foreach ($spelverloop as $resultaat): ?>
+                    <li><?=$resultaat?></li>
+                <?php endforeach ?>
+            
             </ul>
         </section>
 
