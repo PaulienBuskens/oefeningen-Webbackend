@@ -86,16 +86,7 @@
 
             </ul>
 
-            <h1>Opdracht recursive: deel 2</h1>
-
-            <ul>
-                <li>Probeer nu de statics (moest je die gebruikt hebben), volledig weg te werken zodat je op dezelfde pagina voor meerdere personen een individueel interestplan kan berekenen</li>
-
-                <li>Je kan hiervoor de statics verplaatsen naar een paramter, of je kan, zoals in JavaScript vaak het geval is, alle parameters in een array steken en deze array als parameter opgeven in de functie.</li>
-
-                <li>Op het einde van de berekening krijg je dan de volledige array met alle informatie terug.</li>
-            </ul>
-
+           
         </section>
 
     </body>
