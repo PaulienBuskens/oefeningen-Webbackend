@@ -1,3 +1,12 @@
+<?php
+    $timestamp = mktime(22,35,25,01,21,1904);
+    $datum     = date('d F Y, g:i:s A', $timestamp);
+
+    setlocale('LC_ALL', 'nld_nld');
+
+    $datum2 = strftime('%d %B %Y, %H:%M:%S %p', $timestamp);
+?>
+
 <!doctype html>
 <html>
     <head>
@@ -10,19 +19,14 @@
         <section class="body">
             <h1>Opdracht date: deel 1</h1>
 
-            <ul>
-                <li>Maak een geldig HTML document</li> 
+            <p><?php echo $datum ?></p>
 
-                <li>Zet deze datum 22u 35m 25sec 21 januari 1904 om naar een timestamp</li>
-
-                <li>Toon deze timestamp daarna in het volgende formaat: 21 January 1904, 10:35:25 pm</li>
-            </ul>
 
             <h1>Opdracht date: deel 2</h1>
 
-            <ul>
-                <li>Zorg dat de benamingen in het Nederlands komen te staan</li>
-            </ul>
+            <p><?= $datum2 ?></p>
+
+
         </section>
     </body>
 </html>
