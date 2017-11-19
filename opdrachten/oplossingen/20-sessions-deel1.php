@@ -24,10 +24,8 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Opdracht sessions</title>
-        <link rel="stylesheet" href="http://web-backend.local/css/global.css">
-        <link rel="stylesheet" href="http://web-backend.local/css/facade.css">
+        <title>Opdracht sessions deel 1</title>
+       
     </head>
     <body class="web-backend-opdracht">
         
@@ -35,7 +33,7 @@
 
         <a href="20-sessions-deel1.php?session=destroy">Vernietig sessie</a>
 
-        <h2>Deel1: Registratiegegevens</h2>
+        <h2>Deel1: registratiegegevens</h2>
         
         <form action="20-sessions-deel2.php" methode="POST">
             <ul>
@@ -49,7 +47,7 @@
 				</li>
 			</ul>
 
-			<input type="submit" name="submit">
+			<input type="submit" name="Submit">
         
         </form>
     </body>
