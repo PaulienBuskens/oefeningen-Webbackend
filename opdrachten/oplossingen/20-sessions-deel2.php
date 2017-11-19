@@ -15,29 +15,31 @@
 	var_dump( $_SESSION );
 
 	$email		=	( isset( $_SESSION[ 'registrationData' ][ 'deel1' ][ 'email'] ) ) ? $_SESSION[ 'registrationData' ][ 'deel1' ][ 'email'] : '';
-	$nickname		=	( isset( $_SESSION[ 'registrationData' ][ 'deel1' ][ 'nickname'] ) ) ? $_SESSION[ 'registrationData' ][ 'deel1' ][ 'nickname'] : '';
+	$nickname	=	( isset( $_SESSION[ 'registrationData' ][ 'deel1' ][ 'nickname'] ) ) ? $_SESSION[ 'registrationData' ][ 'deel1' ][ 'nickname'] : '';
 
 ?>
+
 
 <!doctype html>
 <html>
     <head>
         <meta charset="utf-8">
-    	<title>Php oefening 021 - deel1</title>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Opdracht sessions</title>
+        <link rel="stylesheet" href="http://web-backend.local/css/global.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/facade.css">
     </head>
-    <body>
-		
-		<h1>Php oefening21-deel1</h1>
+    <body class="web-backend-opdracht">
+        
+        <h1>Opdracht sessions: deel 1</h1>
 
-		<a href="phpoefening-021-deel1.php?session=destroy">Vernietig sessie</a>
-		
-		<h2>Deel1: registratiegegevens</h2>
+        <a href="20-sessions.php?session=destroy">Vernietig sessie</a>
 
-		<form action="phpoefening-021-deel2.php" method="POST">
-			
-			<ul>
-				<li>
+        <h2>Deel1: Registratiegegevens</h2>
+        
+        <form action="20-sessions.php" methode="POST">
+            <ul>
+                <li>
 					<label for="email">email</label>
 					<input type="text" id="email" name="email" value="<?= $email ?>" placeholder="vul email in" <?= ( isset( $_GET['focus'] ) && $_GET['focus'] == "email" ) ? 'autofocus' : '' ?>>
 				</li>
@@ -48,9 +50,7 @@
 			</ul>
 
 			<input type="submit" name="submit">
-
-		</form>
-
-		
+        
+        </form>
     </body>
 </html>
