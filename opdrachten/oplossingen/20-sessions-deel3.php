@@ -3,20 +3,18 @@
 
 	session_start();
 
-	if ( isset( $_GET['session'] ) )
+    var_dump( $_POST );
+    var_dump( $_SESSION );
+
+    if ( isset( $_POST[ 'submit' ] ) )
     {
-        if ( $_GET['session']  == 'destroy' )
-        {
-            session_destroy( );
-            header( 'location: phpoefening-021-deel1.php' );
-        }
+        $_SESSION['registrationData'][ 'deel2' ]['straat']  =   $_POST[ 'straat' ];
+        $_SESSION['registrationData'][ 'deel2' ]['nummer']  =   $_POST[ 'nummer' ];
+        $_SESSION['registrationData'][ 'deel2' ]['gemeente']  =   $_POST[ 'gemeente' ];
+        $_SESSION['registrationData'][ 'deel2' ]['postcode']  =   $_POST[ 'postcode' ];
     }
 
-	var_dump( $_SESSION );
-
-	$email		=	( isset( $_SESSION[ 'registrationData' ][ 'deel1' ][ 'email'] ) ) ? $_SESSION[ 'registrationData' ][ 'deel1' ][ 'email'] : '';
-	$nickname	=	( isset( $_SESSION[ 'registrationData' ][ 'deel1' ][ 'nickname'] ) ) ? $_SESSION[ 'registrationData' ][ 'deel1' ][ 'nickname'] : '';
-
+    $registrationData    =   $_SESSION['registrationData'];
 ?>
 
 
@@ -24,33 +22,29 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Opdracht sessions</title>
-        <link rel="stylesheet" href="http://web-backend.local/css/global.css">
-        <link rel="stylesheet" href="http://web-backend.local/css/facade.css">
+       
+        <title>Opdracht sessions deel 3</title>
+       
     </head>
     <body class="web-backend-opdracht">
         
-        <h1>Opdracht sessions: deel 1</h1>
+        <h1>Opdracht sessions: deel 3</h1>
 
-        <a href="20-sessions.php?session=destroy">Vernietig sessie</a>
+        <a href="20-sessions-deel1.php?session=destroy">Vernietig sessie</a>
 
-        <h2>Deel1: Registratiegegevens</h2>
-        
-        <form action="20-sessions.php" methode="POST">
-            <ul>
+        <h2>Overzicht</h2>
+
+        <ul>
+        <?php foreach( $registrationData as $deelKey => $deelArray ):  ?>
+
+            <?php foreach( $deelArray as $data => $value ):  ?>
                 <li>
-					<label for="email">email</label>
-					<input type="text" id="email" name="email" value="<?= $email ?>" placeholder="vul email in" <?= ( isset( $_GET['focus'] ) && $_GET['focus'] == "email" ) ? 'autofocus' : '' ?>>
-				</li>
-				<li>
-					<label for="nickname">nickname</label>
-					<input type="text" id="nickname" name="nickname" value="<?= $nickname ?>" placeholder="vul nickname in" <?= ( isset( $_GET['focus'] ) && $_GET['focus'] == "nickname" ) ? 'autofocus' : '' ?>>
-				</li>
-			</ul>
-
-			<input type="submit" name="submit">
+                    <?= $data ?>: <?= $value ?>
+                    <p><a href="phpoefening-021-<?= $deelKey ?>.php?focus=<?= $data ?>">wijzig</a></p>
+                </li>
+            <?php endforeach ?>
+        <?php endforeach ?>
+        </ul>
         
-        </form>
     </body>
 </html>

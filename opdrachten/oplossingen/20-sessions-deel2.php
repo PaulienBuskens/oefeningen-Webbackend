@@ -34,7 +34,7 @@ session_start();
         
         <h1>Opdracht sessions: deel 2</h1>
 
-        <a href="20-sessions.php?session=destroy">Vernietig sessie</a>
+        <a href="20-sessions-deel1.php?session=destroy">Vernietig sessie</a>
 
         <h2>Registratiegegevens</h2>
         
