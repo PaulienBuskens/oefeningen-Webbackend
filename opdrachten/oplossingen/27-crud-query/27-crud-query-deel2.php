@@ -15,16 +15,16 @@
         
         $statement->execute( );
 
-        $bieren	=array();
+        $brouwers	=array();
         
             while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
-                    $bieren[] 	=	$row;
+                    $brouwers[] 	=	$row;
             }
         
             $columnNames	=	array();
             $columnNames[]	=	'Biernummer';
         
-            foreach( $bieren[0] as $key => $bier ){
+            foreach( $brouwers[0] as $key => $bier ){
                     $columnNames[  ]	=	$key;
             }
 
