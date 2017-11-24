@@ -4,15 +4,8 @@
 
     try{
     
-    $db = new pdo('mysql:host=localhost;dbname=bieren', 'root','','bieren');
+    $db = new pdo('mysql:host=localhost;dbname=bieren', 'root','');
 
-
-    if($db->errno > 0){
-
-        $message = 'Kan geen connectie maken ' .$db->connect_error;
-
-    }else{
-        $message = 'connectie geslaagd';
 
         $sql = 'SELECT *
         FROM bieren 
@@ -29,7 +22,7 @@
 
         $bieren	=array();
         
-            while ( $row = $sql->fetch(PDO::FETCH_ASSOC)){
+            while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                     $bieren[] 	=	$row;
             }
         
@@ -39,12 +32,11 @@
             foreach( $bieren[0] as $key => $bier ){
                     $columnNames[  ]	=	$key;
             }
-    }
-} catch ( PDOException $e )
-{
+
+    }catch ( PDOException $e ){
     $message['type']	=	'error';
     $message['text']	=	'De connectie is niet gelukt.';
-}
+    }
 
 ?>
 
@@ -54,26 +46,60 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Opdracht CRUD query</title>
-        
-    </head>
+        <style>
+			.modal
+			{
+				padding			:	6px;
+				border-radius	:	3px;
+			}
+
+			.success
+			{
+				background-color:lightgreen;
+			}
+
+			.error
+			{
+				background-color:red;
+			}
+
+			.even
+			{
+				background-color:lightgrey;
+			}
+		</style>
+	</head>
+
     <body class="web-backend-opdracht">
 
-        <p><?= $message ?></p>
+        <?php if ( $message ): ?>
+		    <div class="modal <?= $message[ "type" ] ?>">
+			    <?= $message['text'] ?>
+		    </div>
+    	<?php endif ?>
 
-            <tabel>
-                <thead>
-                <tr>
-                </tr>
-                </thead>
+	<table>
+		
+		<thead>
+			<tr>
+				<?php foreach ($columnNames as $columnName): ?>
+					<th><?= $columnName ?></th>
+				<?php endforeach ?>
+			</tr>
+		</thead>
 
-                <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </tabel>
-        
-        
+		<tbody>
+		
+			<?php foreach ($bieren as $key => $bier): ?>
+				<tr class="<?= ( ( $key + 1) %2 == 0 ) ? 'even' : '' ?>">
+					<td><?= ($key + 1) ?></td>
+					<?php foreach ($bier as $value): ?>
+						<td><?= $value ?></td>
+					<?php endforeach ?>
+				</tr>
+			<?php endforeach ?>
+			
+		</tbody>
+	</table>
     </body>
 </html>
