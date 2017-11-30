@@ -5,7 +5,7 @@
 
     try{
     
-    $db = new pdo('mysql:host=localhost;dbname=bieren', 'root','');
+    $db = new PDO('mysql:host=localhost;dbname=bieren', 'root','');
 
 
         $brouwerSql = 'SELECT brnaam, brouwernr FROM brouwers';
