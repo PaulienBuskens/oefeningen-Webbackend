@@ -1,7 +1,7 @@
 <?php
 
-    $message = '';
-    $geselecteerdeBrouwer = '';
+    $message = false;
+    $geselecteerdeBrouwer = false;
 
     try{
     
