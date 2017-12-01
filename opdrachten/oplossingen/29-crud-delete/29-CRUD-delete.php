@@ -4,12 +4,11 @@
         $deleteConfirm  = false;
         $deleteId       = false;
 
-   
         try{
 
             $db = new PDO('mysql:host=localhost;dbname=bieren','root','');
 
-            if(isser($_POST['confirm'])){
+            if(isset($_POST['confirm'])){
                 $deleteConfirm = true;
                 $deleteId      = $_POST['confirm'];
             }
@@ -114,11 +113,11 @@
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
 
             <button type="submit" name="delete" value="<?= $deleteId ?>">
-                Absoluut zeker!
+                verwijder maar
             </button>
 
             <button type="submit">
-                Ongedaan maken
+                Toch maar niet
             </button>
 
         </form>
