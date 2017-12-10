@@ -1,53 +1,51 @@
 <?php
 
-    class Database{
+    sesison_start();
 
-        private $db;
-
-        public function __construct( $db ){
-            $this->db = $db;
-        }
-
-        public function query( $query. $tokens = false){
-            $statement = $this->db->prepare($query);
-
-            if($tokens){
-                foreach($tokens as $token => $tokenValue){
-                    $statement->bindValue($token, $tokenValue);
-                }
-            }
-
-            $statement->execute();
-
-            $fieldnames = array();
-
-            for ($fieldNumber = 0; $fieldNumber < $statement->ColumnCount(); ++$fieldNumber){
-                $fieldnames[] = $statement->getColumnMeta($fieldNumber)['name'];
-            }
-
-            $data = array();
-
-            while($row = $statement-> fetch(PDO::FETCH_ASSOC)){
-                $data[] = $row;
-            }
-
-            $returnArray['fieldnames'] = $fieldnames;
-            $returnArray['data']       = $data;
-
-            return $returnArray;
-        }
+    function __autoload($classname){
+        require_once($classname . '.php');
     }
 
+    $connection = new PDO('mysql:host=localhost;dbname=phpoefening029','root','';)
+
+    if(User::validate($connection)){
+        $message = Message::getMessage();
+
+    }else{
+        User::logout();
+        new Message('error', 'Er ging iets mistijdens het inloggen, probeer opnieuw.');
+        header( 'location: login-form.php');
+    }
+
+    var_dump($_SESSION);
+
+
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
    
-    <title>Document</title>
+    <title>Dashboard</title>
 </head>
 <body>
+
+    <h1>Dashboard</h1>
+
+    <?php if(isset($message)): ?>
+        <div class="modal <?= $message['type']?> ">
+            <?= $message['text']?>
+        </div>
+    
+    <?php endif ?>
+
+    <p>hallo,</p>
+
+    <a href="logout.php">uitloggen</a>
     
 </body>
 </html>
