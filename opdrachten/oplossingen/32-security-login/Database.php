@@ -8,7 +8,7 @@
             $this->db = $db;
         }
 
-        public function query( $query. $tokens = false){
+        public function query( $query, $tokens = false){
             $statement = $this->db->prepare($query);
 
             if($tokens){
