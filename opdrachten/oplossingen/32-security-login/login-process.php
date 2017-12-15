@@ -49,7 +49,7 @@
 
 					if ( $loginUser ){
 						$registrationSuccess = new Message("success", "Welkom, u bent ingelogd.");
-						header('location: \dashboard.php');
+						header('location: dashboard.php');
 					}
 				}else{
 					$userExistsMessage	=	new Message('error', 'U kon niet ingelogd worden. Probeer opnieuw.');

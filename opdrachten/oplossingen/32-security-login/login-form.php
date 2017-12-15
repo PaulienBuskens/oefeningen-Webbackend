@@ -98,7 +98,7 @@
 			<input type="submit" name="submit" value="log in">
 		</form>
 		
-		<p>Nog geen login? <a href="-registration-form.php">Registreer dan hier.</a></p>
+		<p>Nog geen login? <a href="registration-form.php">Registreer dan hier.</a></p>
 		
 		<p>Opm: het paswoord van alle gebruikers is "test"</p>
 

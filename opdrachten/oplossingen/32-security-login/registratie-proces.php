@@ -7,10 +7,9 @@
 		require_once( $classname . '.php' );
 	}
 
-	$registrationFormName	=	"registration-form.php";
+	$registrationFormName	=	"registratie-form.php";
 
-	if ( isset( $_POST[ 'generate-password' ] ) )
-	{
+	if ( isset( $_POST[ 'generate-password' ] ) ){
 		$generatedPassword	=	generatePassword( 16, true, true );
 
 		$_SESSION[ 'registration' ][ 'email' ]		=	$_POST[ 'email' ];
@@ -19,9 +18,7 @@
 		header( 'location: ' . $registrationFormName );
 	}
 
-	elseif ( isset( $_POST[ 'submit' ] ) )
-	
-	{
+	elseif ( isset( $_POST[ 'submit' ] ) ){
 		$email		=	$_POST[ 'email' ];
 		$password	=	$_POST[ 'password' ];
 
@@ -31,22 +28,15 @@
 
 		$isEmail	=	filter_var( $email, FILTER_VALIDATE_EMAIL );
 
-		if ( !$isEmail )
-		{
+		if ( !$isEmail ){
 			$emailError = new Message( "error", "Dit is geen geldig e-mailadres. Vul een geldig e-mailadres in." ); 
 			
 			header('location: ' . $registrationFormName );
-		}
-
-	
-		elseif ( $password == '' )
-		{
+		}elseif ( $password == '' ){
 			new Message( "error", "Dit is geen geldig paswoord. Vul een geldig paswoord in." ); 
 			
 			header('location: ' . $registrationFormName );
-		}
-		else
-		{
+		}else{
 			
 
 			$connection	=	new PDO( 'mysql:host=localhost;dbname=phpoefening029', 'root', '' );
@@ -58,23 +48,18 @@
 										WHERE email = :email', 
 									array(':email' => $email ) );
 
-			if ( isset( $userData['data'][ 0 ] ) )
-			{
+			if ( isset( $userData['data'][ 0 ] ) ){
 				$userExistsError = new Message( "error", "De gebruiker met het e-mailadres " . $email . "komt reeds voor in onze database." ); 
 
 				header('location: ' . $registrationFormName );
-			}
-			else
-			{
+			}else{
 				$newUser	=	User::CreateNewUser( $connection, $email, $password );
 
-				if ( $newUser )
-				{
+				if ( $newUser ){
 					$registrationSuccess = new Message("success", "Welkom, u bent vanaf nu geregistreerd in onze app.");
 					header('location: dashboard.php');
 				}
 			}
-
 		}
 	}
 
@@ -129,7 +114,6 @@
 		
 		return $passwordDump; 
 	}
-
-
+}
 
 ?>

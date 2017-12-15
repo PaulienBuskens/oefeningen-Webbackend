@@ -70,7 +70,7 @@
 			</div>
 		<?php endif ?>
 		
-		<form action="registration-proces.php" method="post">
+		<form action="registratie-proces.php" method="post">
 			<ul>
 				<li>
 					<label for="email">Email</label>
