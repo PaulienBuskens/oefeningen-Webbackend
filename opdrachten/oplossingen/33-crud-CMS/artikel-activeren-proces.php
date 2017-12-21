@@ -15,14 +15,14 @@
     define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']);
     define('HOST', dirname( BASE_URL). '/');
 
-    $message = false
+    $message = false;
 
-    if (Message::hasMessage()){
+    if ( Message::hasMessage() ){
         $message = Message::getMessage();
         Message::remove();
     }
 
-    $db = new PDO('mysql:host=localhost;dbname=phpoefening029','root','');
+    $db = new PDO('mysql:host=localhost;dbname=phpoefening033','root','');
 
     $datebaseWrapper = new Database($db);
     $user = new User($databaseWrapper);

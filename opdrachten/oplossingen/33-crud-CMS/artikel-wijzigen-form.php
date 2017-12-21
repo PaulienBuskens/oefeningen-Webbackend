@@ -23,7 +23,7 @@
         Message::remove();
     }
 
-    $db = new PDO('mysql:host=localhost;dbname=phpoefening029', 'root', '');
+    $db = new PDO('mysql:host=localhost;dbname=phpoefening033', 'root', '');
     $databaseWrapper    =   new Database( $db );
 
     $user = new User( $databaseWrapper );

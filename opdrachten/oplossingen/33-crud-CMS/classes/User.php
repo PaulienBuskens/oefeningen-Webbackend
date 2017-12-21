@@ -13,7 +13,7 @@
 				$this->db = $db;
 			}
 
-			public function register($email.$password){
+			public function register($email,$password){
 				$register = false;
 
 				if (!$this->checkIfUserExists($email)){
@@ -78,7 +78,7 @@
 		}
 
 		public function validate(){
-			isValid = false;
+			$isValid = false;
 
 			if(isset($_COOKIE['authenticate'])){
 				$cookie = $_COOKIE['authenticate'];
@@ -99,7 +99,7 @@
 					$hashedEmail = $this->hash($cookieEmail,$this->salt);
 
 					if ($hashedEmail === $cookieHashedEmail){
-						$this-email = $cookieEmail;
+						$this->email = $cookieEmail;
 						$isValid = true;
 					}
 				}

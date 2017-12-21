@@ -83,7 +83,7 @@
     <?php endif ?>
 
     <h1>Registreren</h1>
-    <form action="<?= HOST ?>registratie-process.php" method="POST">
+    <form action="<?= HOST ?>registratie-proces.php" method="POST">
         <ul>
             <li>
                 <label for="email">e-mail</label>

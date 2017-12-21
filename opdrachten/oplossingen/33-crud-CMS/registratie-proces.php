@@ -44,7 +44,7 @@
 
         if ( $email !== '' && $password !== '' ){
 
-            $db = new PDO('mysql:host=localhost;phpoefening029', 'root', ''); // Connectie maken
+            $db = new PDO('mysql:host=localhost;phpoefening033', 'root', ''); 
 
             $databaseWrapper    =   new Database( $db );
             

@@ -4,10 +4,10 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Databank: `phpoefening029`
+-- Databank: `phpoefening033`
 --
-CREATE DATABASE IF NOT EXISTS `phpoefening029` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `phpoefening029`;
+CREATE DATABASE IF NOT EXISTS `phpoefening033` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `phpoefening033`;
 
 -- --------------------------------------------------------
 

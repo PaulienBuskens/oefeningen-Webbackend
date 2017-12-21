@@ -2,15 +2,25 @@
 
     class Message{
 
-        private $type = '';
         private $text = '';
+        private $type = '';
 
-        public function __construct($type, $text){
-            $this->type = $type;
-            $this->text = $text;
+        public function __construct($text, $type){
+            $this->type = $text;
+            $this->text = $type;
 
             $_SESSION['message'] = array("text" => $this->text,
                                         "type" => $this->type);
+        }
+
+        public static function hasMessage(){
+            $hasMessage = false;
+
+            if(isset($_SESSION['message'])){
+                $hasMessage = true;
+            }
+
+            return $hasMessage;
         }
 
         public static function getMessage(){

@@ -16,7 +16,7 @@
     define( 'BASE_URL', 'http://' . $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'PHP_SELF' ] );
     define( 'HOST', dirname( BASE_URL ) . '/');
 
-    $db = new PDO('mysql:host=localhost;dbname=phpoefening029', 'root', ''); 
+    $db = new PDO('mysql:host=localhost;dbname=phpoefening033', 'root', ''); 
 
     $databaseWrapper    =   new Database( $db );
     
