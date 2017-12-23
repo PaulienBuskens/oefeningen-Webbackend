@@ -17,13 +17,17 @@
         public function register($email,$password){
             $register = false;
 
-            if(!this->checkIfUserExists($email)){
+            if(!$this->checkIfUserExists($email)){
                 $usertype = 1;
-                $sale = $this->generateSalt()
+                $sale = $this->generateSalt();
                 $hashedPassword = $this->hash($password,$salt);
 
                 $registerQuery = 'INSERT INTO users( email, password, salt, user_type,data)
-                                  VALUES ( :email, :password, "'.$salt'", '.$usertype . ', NOW() )';
+                                  VALUES (  :email,
+													:password,
+													"' . $salt . '", 
+													' . $usertype . ',
+													NOW() )';
                 
                 $registerPlaceholders = array(':email' => $email,':password'=>$hashedPassword, );
                 
