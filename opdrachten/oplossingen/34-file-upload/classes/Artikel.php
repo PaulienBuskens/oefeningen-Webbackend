@@ -29,8 +29,7 @@
             return $isAdded;
         }
 
-        public function edit( $id, $titel, $artikelBody, $kernwoorden, $datum, $is_active )
-		{
+        public function edit( $id, $titel, $artikelBody, $kernwoorden, $datum, $is_active ){
 			$isEdited	=	false;
 
 			$editQuery	=	'UPDATE artikels 
@@ -56,16 +55,14 @@ var_dump($editQuery);
 			return $isEdited;
 		}
 
-		public function get( $id = false )
-		{
+		public function get( $id = false ){
 			$queryString	=	'SELECT * 
 									FROM artikels
 									WHERE is_archived = 0';
 
 			$placeholders	=	false;
 			
-			if ( $id )
-			{
+			if ( $id ){
 				$queryString 	.= 	' AND id = :id';
 				$placeholders	=	array( ':id' => $id ); 
 			}
@@ -75,8 +72,7 @@ var_dump($editQuery);
 			return $result;
 		}
 
-		public function toggle( $id )
-		{
+		public function toggle( $id ){
 			$toggle = false;
 
 			$toggleQuery	=	'UPDATE artikels 
@@ -93,8 +89,7 @@ var_dump($editQuery);
 			return $delete;
 		}
 
-		public function delete( $id )
-		{
+		public function delete( $id ){
 			$delete	=	false;
 
 			$deleteQuery	=	'UPDATE artikels
