@@ -1,0 +1,2 @@
+RewritEngine On
+RewritRole ^([^/\.]*)/?$ index.php?user=$1
