@@ -1,0 +1,14 @@
+RewriteEngine On
+
+RewriteRule overview/([^/\.]+)/([^/\.]+)/?$ index.php?controller=overview&tabel=$1&id=$2
+
+RewriteRule insert/([^/\.]+)/?$ index.php?controller=insert&tabel=$1
+
+RewriteRule delete/([^/\.]+)/([^/\.]+)/?$ index.php?controller=delete&tabel=$1&id=$2
+
+RewriteRule update/([^/\.]+)/([^/\.]+)/?$ index.php?controller=update&tabel=$1&id=$2
+
+# Voor de uitbreiding: alles in ��n get-variabele proppen
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^(.*)$ index.php?url=$1 [PT,L]
