@@ -9,7 +9,7 @@
         $message = $_POST['message'];
         $copy = (issest($_POST['send-copy'])) ? true : false;
 
-        $db = new mysqli('localhost', 'root', 'root', 'phpoefening037');
+		$db = new PDO('mysql:host=localhost;dbname=bieren','root','');
         
         if($db->connect_erno > 0){
             die('Kan geen connectie maken: ' . $db->connect_error . '.');

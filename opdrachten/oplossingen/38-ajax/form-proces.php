@@ -2,19 +2,23 @@
 
 	session_start();
 
-	if (isset($_POST['submit'])){
+	if (isset($_POST['submit']))
+	{
 	
 		$admin			=		'g917817@rmqkr.net';
 	
 		$sender			=		$_POST['email'];
 		$message		=		$_POST['message'];
-		$copy				=		(isset($_POST['send-copy'])) ? true : false; // checkbox kan mogelijk niet gechecked zijn en wordt dus niet meegegeven
+		$copy				=		(isset($_POST['send-copy'])) ? true : false; 
 
-		$db = new PDO('mysql:host=localhost;dbname=bieren','root','');
-
-		if($db->connect_errno > 0){
+        $db = new PDO('mysql:host=localhost;dbname=bieren','root','');
+		
+		if($db->connect_errno > 0)
+		{
 			die('Kan geen connectie maken: ' . $db->connect_error . '.');
-		}else{
+		}
+		else
+		{
 			$result = $db->query('INSERT INTO contact_messages (email,
 														body,
 														time_sent)
@@ -23,8 +27,10 @@
 														"' . $message . '",
 														NOW())');
 
-			if ($db->affected_rows > 0){
+			if ($db->affected_rows > 0)
+			{
 
+				
 				$to      		= 	$admin;
 				$subject 		= 	'Vraag van ' . $sender;
 
@@ -40,8 +46,9 @@
 				$messageSent = mail($to, $subject, $body, $headers);	
 
 
-				$copySent	=	true;
-				if ($copy){
+				$copySent	=	true; 
+				if ($copy)
+				{
 					$to      		= 	$sender;
 					$subject 		= 	'Kopie van vraag aan ' . $admin;
 
@@ -58,13 +65,16 @@
 					$copySent 	=	mail($to, $subject, $body, $headers);
 				}
 
-				if ($messageSent && $copySent){
+				if ($messageSent && $copySent)
+				{
 					
 					$_SESSION['message']['type'] 	=	'success';
 					$_SESSION['message']['body']	=	'Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.';
 
 					unset($_SESSION['fieldNames']);
-				}else{
+				}
+				else
+				{
 
 					$_SESSION['fieldNames']['email']		=	isset($_POST['email']) ? $_POST['email'] : '';
 					$_SESSION['fieldNames']['message']		=	isset($_POST['message']) ? $_POST['message'] : '';
