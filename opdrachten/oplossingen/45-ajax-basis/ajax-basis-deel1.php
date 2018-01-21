@@ -1,50 +1,33 @@
-?php
+<?php
 
 $currentPage	=	basename( $_SERVER[ 'PHP_SELF' ] );
 $brouwerNummer	=	( isset( $_GET[ 'brouwernr' ] ) ) ? $_GET[ 'brouwernr' ] : 1;
 
-try
-{
+try{
 	$db = new PDO('mysql:host=localhost;dbname=bieren', 'root', '' ); // Connectie maken
 
-	/* Brouwers ophalen */
-	$brouwersQuery	=	'SELECT brouwers.brouwernr, 
-						brouwers.brnaam
-					FROM brouwers';
+	$brouwersQuery	=	'SELECT brouwers.brouwernr, brouwers.brnaam FROM brouwers';
 
 	$brouwersStatement	=	$db->prepare( $brouwersQuery );
-
 	$brouwersStatement->execute();
-
 	$brouwers	=	array();
 
-	while( $row = $brouwersStatement->fetch( PDO::FETCH_ASSOC ) )
-	{
+	while( $row = $brouwersStatement->fetch( PDO::FETCH_ASSOC ) ){
 		$brouwers[ ]	=	$row;
 	}
-
-	/* Bieren die bij brouwers horen ophalen */
-
 	$bierenQuery	=	'SELECT bieren.naam
 							FROM bieren
 							WHERE bieren.brouwernr = :brouwernummer';
 
 	$bierenStatement	=	$db->prepare( $bierenQuery );
-
 	$bierenStatement->bindValue( ':brouwernummer', $brouwerNummer );
-
 	$bierenStatement->execute();
-
 	$bieren	=	array();
 
-	while( $row = $bierenStatement->fetch( PDO::FETCH_ASSOC ) )
-	{
+	while( $row = $bierenStatement->fetch( PDO::FETCH_ASSOC ) ){
 		$bieren[ ]	=	$row;
 	}
-
-}
-catch ( PDOException $e )
-{
+}catch ( PDOException $e ){
 
 }
 	
@@ -60,7 +43,7 @@ catch ( PDOException $e )
     </head>
     <body>
 
-		<h1>Oplossing AJAX basis: deel1</h1>
+		<h1>Ajax-deel1</h1>
 
 		<form action="<?= $currentPage ?>" method="GET" id="form">
 			
